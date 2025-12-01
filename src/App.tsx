@@ -274,9 +274,9 @@ export default function ConnectFour() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-yellow-400 to-red-500 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-lg w-full">
-        <h1 className="text-5xl font-bold text-center mb-2 text-gray-800">Puissance 4</h1>
-        <p className="text-center text-gray-600 mb-6">Joue contre l'IA</p>
+      <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8 w-full max-w-md sm:max-w-xl">
+        <h1 className="text-4xl sm:text-5xl font-bold text-center mb-2 text-gray-800">Puissance 4</h1>
+        <p className="text-center text-gray-600 mb-4 sm:mb-6">Joue contre l'IA</p>
 
         <div className="mb-6 p-4 bg-blue-100 rounded-lg text-center">
           {gameOver ? (
@@ -291,14 +291,12 @@ export default function ConnectFour() {
         </div>
 
         <div
+        className="grid mb-4 sm:mb-6 bg-blue-700 p-2 sm:p-4 rounded-xl mx-auto"
           style={{
-            display: 'grid',
-            gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-            gap: '8px',
-            marginBottom: '24px',
-            backgroundColor: '#1e40af',
-            padding: '12px',
-            borderRadius: '12px',
+            gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))`,
+            gap: "6px",
+            width: "100%",
+            maxWidth: "min(90vw, 450px)",
           }}
         >
           {board.map((value, index) => {
@@ -308,11 +306,13 @@ export default function ConnectFour() {
                 <button
                   onClick={() => handleColumnClick(col)}
                   disabled={!validColumns[col] || !isPlayerTurn || gameOver}
-                  className={`w-full h-full rounded-full border-2 border-blue-800 text-2xl font-bold transition flex items-center justify-center ${
-                    validColumns[col] && isPlayerTurn && !gameOver
-                      ? 'cursor-pointer hover:opacity-80'
-                      : 'cursor-not-allowed'
-                  }`}
+                  className={`aspect-square w-full rounded-full border-2 border-blue-900
+                  text-xl sm:text-2xl flex items-center justify-center
+                  transition
+                  ${validColumns[col] && isPlayerTurn && !gameOver
+                    ? "hover:opacity-80"
+                    : "opacity-60 cursor-not-allowed"}
+                `}
                   style={{
                     backgroundColor:
                       value === 'X'
